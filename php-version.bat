@@ -1,14 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "diretorio=C:\tools"
+set "directory=C:\tools"
 
 if "%1" == "-l" (
-  for /f %%A in ('dir /ad /b "%diretorio%" ^| findstr /v /i /b /c:"_" ^| findstr /i /c:"php"') do (
+  for /f %%A in ('dir /ad /b "%directory%" ^| findstr /v /i /b /c:"_" ^| findstr /i /c:"php"') do (
     echo %%A [ACTIVE]
   )
 
-  for /f %%A in ('dir /ad /b "%diretorio%" ^| findstr /i /b /c:"_" ^| findstr /i /c:"php"') do (
+  for /f %%A in ('dir /ad /b "%directory%" ^| findstr /i /b /c:"_" ^| findstr /i /c:"php"') do (
     echo %%A
   )
 )
@@ -16,7 +16,7 @@ if "%1" == "-l" (
 
 if "%1" == "active" (
   rem Para cada pasta que contém a palavra-chave "php"
-  for /d %%A in ("%diretorio%\php*" "%diretorio%\_php*") do (
+  for /d %%A in ("%directory%\php*" "%directory%\_php*") do (
       rem Obter o nome da pasta (sem o caminho)
       set "pasta=%%~nxA"
       
@@ -32,5 +32,6 @@ if "%1" == "active" (
           ren "%%A" "_!pasta!"
       )
   )
-  echo Versao alterada para %2
+  echo PHP version updated to %2
+  php -v
 )
